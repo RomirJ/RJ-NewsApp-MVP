@@ -1,39 +1,28 @@
-import { Text } from 'react-native';
-import * as React from 'react';
+// MainPage.js
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
+import AddNewsScreen from './AddNewsScreen';
+import NewsListScreen from './NewsListScreen';
+import { UserProvider } from './UserContext';
 
-const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function HomeStack() {
+const MainPage = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-    </Stack.Navigator>
-  );
-}
-function Returntext() {
-  return (<Text>"Hello"</Text>);
-}
-function AboutStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="About" component={AboutScreen} />
-    </Stack.Navigator>
+    <UserProvider>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="News" component={NewsListScreen} />
+          <Tab.Screen name="Add News" component={AddNewsScreen} />
+          <Tab.Screen name="About" component={AboutScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </UserProvider>
   );
 }
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="About" component={AboutScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-}
+export default MainPage;
